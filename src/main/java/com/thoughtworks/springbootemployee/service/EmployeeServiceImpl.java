@@ -66,9 +66,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeeByGender(String gender) {
-        for (int i = 0; i < 4; i++) {
-            employees.add(new Employee(1,2,"v","male"));
-        }
         return employees.stream()
                 .filter(employee -> gender.equals(employee.getGender()))
                 .collect(Collectors.toList());
