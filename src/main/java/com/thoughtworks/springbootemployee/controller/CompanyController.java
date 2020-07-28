@@ -15,37 +15,38 @@ public class CompanyController {
     private CompanyServiceImpl companyService;
 
     @PostMapping("/companies")
-    public void addCompanies(@RequestBody Company company){
+    public void addCompanies(@RequestBody Company company) {
         companyService.addCompanies(company);
     }
 
     @GetMapping("/companies/{id}")
-    public Company getCompany(@PathVariable int id){
+    public Company getCompany(@PathVariable int id) {
         return companyService.getCompany(id);
     }
 
-    @GetMapping("/companies")
-    public List<Company> getCompanies(){
-        return companyService.getCompanies();
-    }
 
     @GetMapping("/companies/{id}/employees")
-    public List<Employee> getEmployeesByCompanyId(@PathVariable int id){
+    public List<Employee> getEmployeesByCompanyId(@PathVariable int id) {
         return companyService.getEmployeesByCompanyId(id);
     }
 
     @PutMapping("/companies/{id}")
-    public void updateCompany(@PathVariable int id,@RequestBody Company company){
-        companyService.updateCompany(id,company);
+    public void updateCompany(@PathVariable int id, @RequestBody Company company) {
+        companyService.updateCompany(id, company);
     }
 
     @DeleteMapping("/companies/{id}")
-    public void deleteCompany(@PathVariable int id){
+    public void deleteCompany(@PathVariable int id) {
         companyService.deleteCompany(id);
     }
 
-    @GetMapping("/company")
-    public List<Company> getCompanyByPage(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
-        return companyService.getCompanyByPage(page,pageSize);
+
+
+    @GetMapping("/companies")
+    public List<Company> getCompanies(@RequestParam(defaultValue = "-1", required = false) int page, @RequestParam(defaultValue = "-1", required = false) int pageSize) {
+        if (page != -1 && pageSize != -1) {
+            return companyService.getCompanyByPage(page, pageSize);
+        }
+        return companyService.getCompanies();
     }
 }
