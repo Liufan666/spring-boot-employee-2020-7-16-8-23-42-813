@@ -15,4 +15,6 @@ public interface CompanyServices {
     List<Company> getCompanies();
 
     List<Employee> getEmployeesByCompanyId(int id);
+
+    void updateCompany(int id,Company company);
 }

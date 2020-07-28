@@ -33,4 +33,9 @@ public class CompanyController {
     public List<Employee> getEmployeesByCompanyId(@PathVariable int id){
         return companyService.getEmployeesByCompanyId(id);
     }
+
+    @PutMapping("/companies/{id}")
+    public void updateCompany(@PathVariable int id,@RequestBody Company company){
+        companyService.updateCompany(id,company);
+    }
 }

@@ -36,4 +36,13 @@ public class CompanyServiceImpl implements CompanyServices {
                 .findFirst()
                 .orElse(null).getEmployees();
     }
+
+    @Override
+    public void updateCompany(int id,Company company) {
+        for (Company companyTarget : companies) {
+            if (companyTarget.getId() == id) {
+                companyTarget.setEmployees(company.getEmployees());
+            }
+        }
+    }
 }
