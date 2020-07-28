@@ -40,7 +40,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee")
-    public List<Employee> getEmployeeByPage(int page, int pageSize){
+    public List<Employee> getEmployeeByPage(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
         return employeeService.getEmployeeByPage(page,pageSize);//TODO
+    }
+
+    @GetMapping("/employees/gender")
+    public List<Employee> getEmployeeByGender(@RequestParam("gender") String gender){
+        return employeeService.getEmployeeByGender(gender);
     }
 }

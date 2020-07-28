@@ -18,4 +18,6 @@ public interface EmployeeService {
     void updateEmployee(int id, Employee employee);
 
     List<Employee> getEmployeeByPage(int page, int pageSize);
+
+    List<Employee> getEmployeeByGender(String gender);
 }
