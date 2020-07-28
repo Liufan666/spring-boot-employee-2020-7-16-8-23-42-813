@@ -54,4 +54,18 @@ public class CompanyServiceImpl implements CompanyServices {
                 .orElse(null);
         companies.remove(company);
     }
+
+    @Override
+    public List<Company> getCompanyByPage(int page, int pageSize) {
+        List<Company> currentCompanies = new ArrayList<>();
+        int startIndex = (page-1)*pageSize;
+        int endIndex = pageSize*page;
+        for (int i = startIndex; i < Math.min(endIndex, companies.size()); i++) {
+            if(companies.get(i)!=null){
+                currentCompanies.add(companies.get(i));
+            }
+
+        }
+        return currentCompanies;
+    }
 }

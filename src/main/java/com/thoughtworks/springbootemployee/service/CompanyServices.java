@@ -19,4 +19,6 @@ public interface CompanyServices {
     void updateCompany(int id,Company company);
 
     void deleteCompany(int id);
+
+    List<Company> getCompanyByPage(int page, int pageSize);
 }

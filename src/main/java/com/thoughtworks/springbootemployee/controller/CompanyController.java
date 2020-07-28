@@ -43,4 +43,9 @@ public class CompanyController {
     public void deleteCompany(@PathVariable int id){
         companyService.deleteCompany(id);
     }
+
+    @GetMapping("/company")
+    public List<Company> getCompanyByPage(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
+        return companyService.getCompanyByPage(page,pageSize);
+    }
 }
