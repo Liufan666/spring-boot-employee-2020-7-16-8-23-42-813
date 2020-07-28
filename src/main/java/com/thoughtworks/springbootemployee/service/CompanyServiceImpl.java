@@ -4,15 +4,36 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public interface CompanyServiceImpl {
-    void addCompanies(Company company);
+public class CompanyServiceImpl implements CompanyServices {
 
-    Company getCompany(int id);
+    private List<Company> companies = new ArrayList<>();
 
-    List<Company> getCompanies();
+    public void addCompanies(Company company) {
+        companies.add(company);
+    }
 
-    List<Employee> getEmployeesByCompanyId(int id);
+    @Override
+    public Company getCompany(int id) {
+        return companies.stream()
+                .filter(company -> company.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    @Override
+    public List<Employee> getEmployeesByCompanyId(int id) {
+        return companies.stream()
+                .filter(company -> company.getId() == id)
+                .findFirst()
+                .orElse(null).getEmployees();
+    }
 }
