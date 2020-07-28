@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,5 +27,13 @@ public class CompanyService implements CompanyServiceImpl{
     @Override
     public List<Company> getCompanies() {
         return companies;
+    }
+
+    @Override
+    public List<Employee> getEmployeesByCompanyId(int id) {
+        return companies.stream()
+                .filter(company -> company.getId() == id)
+                .findFirst()
+                .orElse(null).getEmployees();
     }
 }
