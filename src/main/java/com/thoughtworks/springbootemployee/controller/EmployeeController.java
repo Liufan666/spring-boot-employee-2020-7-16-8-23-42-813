@@ -33,8 +33,14 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable int id){
         employeeService.deleteEmployee(id);
     }
+
     @PutMapping("/employees/{id}")
     public void updateEmployee(@PathVariable int id,@RequestBody Employee employee){
         employeeService.updateEmployee(id,employee);
+    }
+
+    @GetMapping("/employee")
+    public List<Employee> getEmployeeByPage(int page, int pageSize){
+        return employeeService.getEmployeeByPage(page,pageSize);//TODO
     }
 }

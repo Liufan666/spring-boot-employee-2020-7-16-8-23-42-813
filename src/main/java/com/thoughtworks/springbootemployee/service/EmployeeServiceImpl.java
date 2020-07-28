@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
     List<Employee> employees = new ArrayList<>();
 
@@ -41,12 +41,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void updateEmployee(int id, Employee employee) {
-        for (Employee employeeTarget:employees) {
-            if (employeeTarget.getId() == id){
+        for (Employee employeeTarget : employees) {
+            if (employeeTarget.getId() == id) {
                 employeeTarget.setAge(employee.getAge());
                 employeeTarget.setGender(employee.getGender());
                 employeeTarget.setName(employee.getName());
             }
         }
+    }
+
+    @Override
+    public List<Employee> getEmployeeByPage(int page, int pageSize) {
+        List<Employee> currentEmployees = new ArrayList<>();
+        for (int i = page; i < pageSize; i++) {
+            currentEmployees.add(employees.get(i));
+        }
+        return currentEmployees;
     }
 }
