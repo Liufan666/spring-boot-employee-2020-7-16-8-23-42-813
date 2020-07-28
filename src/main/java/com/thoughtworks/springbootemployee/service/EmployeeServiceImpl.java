@@ -38,4 +38,15 @@ public class EmployeeServiceImpl implements EmployeeService{
                 .orElse(null);
         employees.remove(employee);
     }
+
+    @Override
+    public void updateEmployee(int id, Employee employee) {
+        for (Employee employeeTarget:employees) {
+            if (employeeTarget.getId() == id){
+                employeeTarget.setAge(employee.getAge());
+                employeeTarget.setGender(employee.getGender());
+                employeeTarget.setName(employee.getName());
+            }
+        }
+    }
 }
