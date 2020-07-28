@@ -41,7 +41,7 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public List<Employee> getEmployeeByPage(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
-        return employeeService.getEmployeeByPage(page,pageSize);//TODO
+        return employeeService.getEmployeeByPage(page,pageSize);
     }
 
     @GetMapping("/employees/gender")
