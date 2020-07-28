@@ -22,4 +22,9 @@ public class CompanyController {
     public Company getCompany(@PathVariable int id){
         return companyService.getCompany(id);
     }
+
+    @GetMapping("/companies")
+    public List<Company> getCompanies(){
+        return companyService.getCompanies();
+    }
 }

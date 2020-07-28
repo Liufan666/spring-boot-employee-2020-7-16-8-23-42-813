@@ -22,4 +22,9 @@ public class CompanyService implements CompanyServiceImpl{
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public List<Company> getCompanies() {
+        return companies;
+    }
 }
