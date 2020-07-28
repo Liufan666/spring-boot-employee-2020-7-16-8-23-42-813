@@ -29,4 +29,13 @@ public class EmployeeServiceImpl implements EmployeeService{
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public void deleteEmployee(int id) {
+        Employee employee = employees.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
+        employees.remove(employee);
+    }
 }
