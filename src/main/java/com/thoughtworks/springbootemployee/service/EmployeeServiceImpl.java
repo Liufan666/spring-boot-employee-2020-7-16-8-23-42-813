@@ -53,8 +53,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getEmployeeByPage(int page, int pageSize) {
         List<Employee> currentEmployees = new ArrayList<>();
-        for (int i = page; i < pageSize; i++) {
-            currentEmployees.add(employees.get(i));
+        int startIndex = (page-1)*pageSize;
+        int endIndex = pageSize*page;
+        for (int index = startIndex; index < Math.min(endIndex, employees.size()); index++) {
+            if(employees.get(index)!=null){
+                currentEmployees.add(employees.get(index));
+            }
+
         }
         return currentEmployees;
     }

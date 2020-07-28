@@ -60,9 +60,9 @@ public class CompanyServiceImpl implements CompanyServices {
         List<Company> currentCompanies = new ArrayList<>();
         int startIndex = (page-1)*pageSize;
         int endIndex = pageSize*page;
-        for (int i = startIndex; i < Math.min(endIndex, companies.size()); i++) {
-            if(companies.get(i)!=null){
-                currentCompanies.add(companies.get(i));
+        for (int index = startIndex; index < Math.min(endIndex, companies.size()); index++) {
+            if(companies.get(index)!=null){
+                currentCompanies.add(companies.get(index));
             }
 
         }
