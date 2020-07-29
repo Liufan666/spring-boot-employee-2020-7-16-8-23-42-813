@@ -34,12 +34,12 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public void updateCompany(@PathVariable int id, @RequestBody Company company) {
+    public void updateCompany(@PathVariable Integer id, @RequestBody Company company) {
         companyService.updateCompany(id, company);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCompany(@PathVariable int id) {
+    public void deleteCompany(@PathVariable Integer id) {
         companyService.deleteCompany(id);
     }
 

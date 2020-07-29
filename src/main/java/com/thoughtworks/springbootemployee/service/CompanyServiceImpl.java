@@ -41,21 +41,15 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void updateCompany(int id,Company company) {
-        for (Company companyTarget : companies) {
-            if (companyTarget.getCompanyId() == id) {
-                companyTarget.setEmployees(company.getEmployees());
-            }
-        }
+    public void updateCompany(Integer id, Company company) {
+        company.setCompanyId(id);
+        companyRepository.save(company);
     }
 
+
     @Override
-    public void deleteCompany(int id) {
-        Company company = companies.stream()//todo
-                .filter(e -> e.getCompanyId() == id)
-                .findFirst()
-                .orElse(null);
-        companies.remove(company);
+    public void deleteCompany(Integer id) {
+        companyRepository.deleteById(id);
     }
 
     @Override
