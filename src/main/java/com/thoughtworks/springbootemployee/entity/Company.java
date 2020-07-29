@@ -13,15 +13,12 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "company_id")
     private Integer companyId;
+    private String name;
     @OneToMany(mappedBy = "company")
     private List<Employee> employees;
 
     public Integer getCompanyId() {
         return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
     }
 
     public List<Employee> getEmployees() {
@@ -30,5 +27,17 @@ public class Company {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

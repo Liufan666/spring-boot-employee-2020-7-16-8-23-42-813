@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public void addCompanies(Company company) {
-        companies.add(company);
+        companyRepository.save(company);
     }//todo
 
     @Override
