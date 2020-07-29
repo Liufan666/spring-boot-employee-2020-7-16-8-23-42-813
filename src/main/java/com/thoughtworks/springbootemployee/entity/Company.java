@@ -1,18 +1,25 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "company")
 public class Company {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "company_id")
+    private Integer companyId;
+    @OneToMany(mappedBy = "company")
     private List<Employee> employees;
 
-    public int getId() {
-        return id;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public List<Employee> getEmployees() {
