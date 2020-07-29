@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
+import dto.EmployeeRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public String addEmployee(@RequestBody Employee employee){
-        employeeService.addEmployee(employee);
-        return "add success";
+    public void addEmployee(@RequestBody EmployeeRequestDto employeeRequestDto){
+        employeeService.addEmployee(employeeRequestDto);
     }
 
     @GetMapping

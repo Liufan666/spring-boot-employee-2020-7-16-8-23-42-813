@@ -1,8 +1,11 @@
 package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.utils.PageHelper;
+import dto.EmployeeRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,16 +15,22 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final CompanyRepository companyRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, CompanyRepository companyRepository) {
         this.employeeRepository = employeeRepository;
+        this.companyRepository = companyRepository;
     }
 
     List<Employee> employees = new ArrayList<>();
 
     @Override
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
+    public void addEmployee(EmployeeRequestDto employeeRequestDto) {
+        Integer company_id = employeeRequestDto.getCompany_id();
+        Employee employee = employeeRequestDto.toEntity();
+        Company company = companyRepository.findById(company_id).get();
+        employee.setCompany(company);
+        employeeRepository.save(employee);
     }
 
     @Override

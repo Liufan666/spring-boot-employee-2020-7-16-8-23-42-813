@@ -1,13 +1,14 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+import dto.EmployeeRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface EmployeeService {
-    void addEmployee(Employee employee);
+    void addEmployee(EmployeeRequestDto employeeRequestDto);
 
     List<Employee> getEmployees();
 
