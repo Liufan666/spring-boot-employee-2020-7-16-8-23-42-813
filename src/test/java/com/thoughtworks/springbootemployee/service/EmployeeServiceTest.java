@@ -30,34 +30,28 @@ public class EmployeeServiceTest {
 
     @Mock
     private EmployeeRepository employeeRepository;
-    @Mock
-    private CompanyRepository companyRepository;
     @InjectMocks
-    private CompanyServiceImpl companyService;
+    private EmployeeServiceImpl employeeService;
+
+    private static EmployeeRequestDto employeeRequestDto;
+
+    @BeforeAll
+    static void createEmployee(){
+        employeeRequestDto = new EmployeeRequestDto();
+        employeeRequestDto.setAge(1);
+        employeeRequestDto.setCompanyId(1);
+        employeeRequestDto.setGender("male");
+        employeeRequestDto.setName("vicky");
+    }
 
     @Test
     void should_return_all_employees_when_find_all_given_none() {
         //given
-        EmployeeServiceImpl employeeServiceImpl = new EmployeeServiceImpl(employeeRepository, companyRepository);
 
         //when
-        employeeServiceImpl.getEmployees(Pageable.unpaged());
+        employeeService.getEmployees(Pageable.unpaged());
 
         //then
         verify(employeeRepository).findAll(Pageable.unpaged());
-    }
-
-    @Test
-    void should_return_1_employee_when_find_employee_in_company_given_() {
-        //given
-        EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
-        CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);
-        EmployeeServiceImpl employeeServiceImpl = new EmployeeServiceImpl(employeeRepository, companyRepository);
-
-        //when
-        List<Employee> employeeList2 = companyService.getEmployeesByCompanyId(1);
-
-        //then
-        assertEquals(5,employeeList2);
     }
 }
