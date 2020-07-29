@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByGender(gender);
     }
 
-    private Employee getEmployee(EmployeeRequestDto employeeRequestDto) {
+    public Employee getEmployee(EmployeeRequestDto employeeRequestDto) {
         Integer companyId = employeeRequestDto.getCompanyId();
         Employee employee = employeeRequestDto.toEntity();
         Company company = companyRepository.findById(companyId).get();

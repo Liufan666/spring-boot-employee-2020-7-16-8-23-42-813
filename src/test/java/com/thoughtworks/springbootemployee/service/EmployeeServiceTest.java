@@ -22,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +31,8 @@ public class EmployeeServiceTest {
 
     @Mock
     private EmployeeRepository employeeRepository;
+//    @Mock
+    private CompanyRepository companyRepository;
     @InjectMocks
     private EmployeeServiceImpl employeeService;
 
@@ -38,6 +41,7 @@ public class EmployeeServiceTest {
     @BeforeAll
     static void createEmployee(){
         employeeRequestDto = new EmployeeRequestDto();
+        employeeRequestDto.setId(1);
         employeeRequestDto.setAge(1);
         employeeRequestDto.setCompanyId(1);
         employeeRequestDto.setGender("male");
@@ -52,6 +56,6 @@ public class EmployeeServiceTest {
         employeeService.getEmployees(Pageable.unpaged());
 
         //then
-        verify(employeeRepository).findAll(Pageable.unpaged());
+        verify(employeeService).getEmployees(Pageable.unpaged());
     }
 }
