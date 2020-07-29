@@ -7,6 +7,8 @@ import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.utils.PageHelper;
 import dto.EmployeeRequestDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,11 +37,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees() {
-        return employeeRepository.findAll();
-    }
-
-    @Override
     public Employee getEmployeeById(Integer id) {
         return employeeRepository
                 .findById(id)
@@ -63,8 +60,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeeByPage(int page, int pageSize) {
-        return PageHelper.page(page, pageSize, employees);
+    public Page<Employee> getEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 
     @Override

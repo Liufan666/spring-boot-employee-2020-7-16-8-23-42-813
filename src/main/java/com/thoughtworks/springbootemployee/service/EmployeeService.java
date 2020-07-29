@@ -2,15 +2,15 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
 import dto.EmployeeRequestDto;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Service
 public interface EmployeeService {
     void addEmployee(EmployeeRequestDto employeeRequestDto);
-
-    List<Employee> getEmployees();
 
     Employee getEmployeeById(Integer id);
 
@@ -18,7 +18,7 @@ public interface EmployeeService {
 
     void updateEmployee(Integer id,EmployeeRequestDto employeeRequestDto);
 
-    List<Employee> getEmployeeByPage(int page, int pageSize);
+    Page<Employee> getEmployees(Pageable pageable);
 
     List<Employee> getEmployeesByGender(String gender);
 }

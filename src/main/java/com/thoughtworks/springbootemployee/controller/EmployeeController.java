@@ -3,7 +3,9 @@ package com.thoughtworks.springbootemployee.controller;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import dto.EmployeeRequestDto;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,28 +25,20 @@ public class EmployeeController {
         employeeService.addEmployee(employeeRequestDto);
     }
 
-    @GetMapping
-    public List<Employee> getEmployees() {
-        return employeeService.getEmployees();
-    }
-
     @GetMapping(params = "gender")
     public List<Employee> getEmployeesByGender(String gender) {
         return employeeService.getEmployeesByGender(gender);
     }
 
 
-    //    @GetMapping("/employees")
-//    public List<Employee> getEmployees(@RequestParam(required = false,value = "page") Integer page,
-//                                       @RequestParam(value = "pageSize",required = false) Integer pageSize,
-//                                       @RequestParam(value = "gender",required = false) String gender){
-//        if (page != null && pageSize != null){
-//            return employeeService.getEmployeeByPage(page,pageSize);
-//        } else if (gender != null){//todo
-//            return employeeService.getEmployeeByGender(gender);
-//        }
-//        return employeeService.getEmployees();
-//    }
+    @GetMapping
+    public Page<Employee> getEmployees(@PageableDefault Pageable pageable, @RequestParam(required = false) boolean unpaged){
+        if(unpaged){
+            return employeeService.getEmployees(Pageable.unpaged());
+        }
+        return employeeService.getEmployees(pageable);
+    }
+
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable Integer id) {
         return employeeService.getEmployeeById(id);
