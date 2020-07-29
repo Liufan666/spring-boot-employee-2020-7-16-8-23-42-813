@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.utils.PageHelper;
 import org.springframework.stereotype.Service;
@@ -25,11 +26,8 @@ public class CompanyServiceImpl implements CompanyService {
     }//todo
 
     @Override
-    public Company getCompany(int id) {
-        return companies.stream()
-                .filter(company -> company.getCompanyId() == id)
-                .findFirst()
-                .orElse(null);
+    public Company getCompanyById(Integer id) {
+        return companyRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @Override

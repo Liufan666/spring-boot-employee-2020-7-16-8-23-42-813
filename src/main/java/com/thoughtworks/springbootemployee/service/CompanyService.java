@@ -10,7 +10,7 @@ import java.util.List;
 public interface CompanyService {
     void addCompanies(Company company);
 
-    Company getCompany(int id);
+    Company getCompanyById(Integer id);
 
     List<Company> getCompanies();
 
