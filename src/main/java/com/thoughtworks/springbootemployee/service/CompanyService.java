@@ -2,6 +2,8 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,7 @@ public interface CompanyService {
 
     Company getCompanyById(Integer id);
 
-    List<Company> getCompanies();
+    Page<Company> getCompanies(Pageable pageable);
 
     List<Employee> getEmployeesByCompanyId(Integer id);
 
@@ -20,5 +22,5 @@ public interface CompanyService {
 
     void deleteCompany(Integer id);
 
-    List<Company> getCompanyByPage(int page, int pageSize);
+
 }

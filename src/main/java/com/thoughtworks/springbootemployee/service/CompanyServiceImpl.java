@@ -5,6 +5,8 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.utils.PageHelper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,9 +33,10 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getCompanies() {
-        return companies;
+    public Page<Company> getCompanies(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
+
 
     @Override
     public List<Employee> getEmployeesByCompanyId(Integer id) {
@@ -52,9 +55,5 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepository.deleteById(id);
     }
 
-    @Override
-    public List<Company> getCompanyByPage(int page, int pageSize) {
-        return PageHelper.page(page,pageSize,companies);
 
-    }
 }
