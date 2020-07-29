@@ -15,8 +15,6 @@ import java.util.List;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    private List<Company> companies = new ArrayList<>();
-
     private final CompanyRepository companyRepository;
 
     public CompanyServiceImpl(CompanyRepository companyRepository) {

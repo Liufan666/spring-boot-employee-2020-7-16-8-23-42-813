@@ -24,8 +24,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.companyRepository = companyRepository;
     }
 
-    List<Employee> employees = new ArrayList<>();
-
     @Override
     public void addEmployee(EmployeeRequestDto employeeRequestDto) {
         Integer company_id = employeeRequestDto.getCompany_id();
