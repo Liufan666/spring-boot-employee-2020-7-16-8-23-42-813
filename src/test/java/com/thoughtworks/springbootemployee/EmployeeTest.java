@@ -2,7 +2,6 @@ package com.thoughtworks.springbootemployee;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
-import com.thoughtworks.springbootemployee.service.EmployeeService;
 import com.thoughtworks.springbootemployee.service.EmployeeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +33,7 @@ public class EmployeeTest {
         employees.add(employee);
 
         //when
-        Employee employeeGet = employeeService.getEmployee(employeeId);
+        Employee employeeGet = employeeService.getEmployeeById(employeeId);
 
         //then
         assertEquals(employee,employeeGet);
