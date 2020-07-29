@@ -30,7 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployee(int id) {
-        return null;
+        return employeeRepository
+                .findAll()
+                .stream()
+                .filter(employee -> employee.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeeByPage(int page, int pageSize) {
-        return PageHelper.page(page,pageSize,employees);
+        return PageHelper.page(page, pageSize, employees);
     }
 
     @Override
