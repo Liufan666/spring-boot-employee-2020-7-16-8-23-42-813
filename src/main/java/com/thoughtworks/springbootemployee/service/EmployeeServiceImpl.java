@@ -3,18 +3,19 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.utils.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     List<Employee> employees = new ArrayList<>();
 
@@ -25,26 +26,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployees() {
-        return employees;
+        return employeeRepository.findAll();
     }
 
     @Override
-    public Employee getEmployee(int id) {
-        return employeeRepository
-                .findAll()
-                .stream()
-                .filter(employee -> employee.getId() == id)
-                .findFirst()
-                .orElse(null);
+    public Employee getEmployeeById(Integer id) {
+        return employeeRepository.findById(id).get();
     }
 
     @Override
     public void deleteEmployee(int id) {
-        Employee employee = employees.stream()//todo
-                .filter(e -> e.getId() == id)
-                .findFirst()
-                .orElse(null);
-        employees.remove(employee);
+
     }
 
     @Override
@@ -64,9 +56,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeeByGender(String gender) {
-        return employees.stream()
-                .filter(employee -> gender.equals(employee.getGender()))
-                .collect(Collectors.toList());//todo
+    public List<Employee> getEmployeesByGender(String gender) {
+        return employeeRepository.findByGender(gender);
     }
+
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.utils.PageHelper;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CompanyServiceImpl implements CompanyServices {
+public class CompanyServiceImpl implements CompanyService {
 
     private List<Company> companies = new ArrayList<>();
+
+    private final CompanyRepository companyRepository;
+
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
 
     public void addCompanies(Company company) {
         companies.add(company);
@@ -20,7 +27,7 @@ public class CompanyServiceImpl implements CompanyServices {
     @Override
     public Company getCompany(int id) {
         return companies.stream()
-                .filter(company -> company.getId() == id)
+                .filter(company -> company.getCompanyId() == id)
                 .findFirst()
                 .orElse(null);
     }
@@ -31,17 +38,14 @@ public class CompanyServiceImpl implements CompanyServices {
     }
 
     @Override
-    public List<Employee> getEmployeesByCompanyId(int id) {
-        return companies.stream()
-                .filter(company -> company.getId() == id)
-                .findFirst()
-                .orElse(null).getEmployees();
+    public List<Employee> getEmployeesByCompanyId(Integer id) {
+        return companyRepository.findById(id).get().getEmployees();
     }
 
     @Override
     public void updateCompany(int id,Company company) {
         for (Company companyTarget : companies) {
-            if (companyTarget.getId() == id) {
+            if (companyTarget.getCompanyId() == id) {
                 companyTarget.setEmployees(company.getEmployees());
             }
         }
@@ -50,7 +54,7 @@ public class CompanyServiceImpl implements CompanyServices {
     @Override
     public void deleteCompany(int id) {
         Company company = companies.stream()//todo
-                .filter(e -> e.getId() == id)
+                .filter(e -> e.getCompanyId() == id)
                 .findFirst()
                 .orElse(null);
         companies.remove(company);

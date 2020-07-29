@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface CompanyServices {
+public interface CompanyService {
     void addCompanies(Company company);
 
     Company getCompany(int id);
 
     List<Company> getCompanies();
 
-    List<Employee> getEmployeesByCompanyId(int id);
+    List<Employee> getEmployeesByCompanyId(Integer id);
 
     void updateCompany(int id,Company company);
 

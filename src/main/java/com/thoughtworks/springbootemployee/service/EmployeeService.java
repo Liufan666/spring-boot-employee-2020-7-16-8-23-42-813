@@ -11,7 +11,7 @@ public interface EmployeeService {
 
     List<Employee> getEmployees();
 
-    Employee getEmployee(int id);
+    Employee getEmployeeById(Integer id);
 
     void deleteEmployee(int id);
 
@@ -19,5 +19,5 @@ public interface EmployeeService {
 
     List<Employee> getEmployeeByPage(int page, int pageSize);
 
-    List<Employee> getEmployeeByGender(String gender);
+    List<Employee> getEmployeesByGender(String gender);
 }
