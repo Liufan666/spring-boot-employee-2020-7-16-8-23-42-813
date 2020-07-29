@@ -16,6 +16,7 @@ public class Employee {
     private String gender;
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 
     public Employee(int id, int age, String name, String gender) {

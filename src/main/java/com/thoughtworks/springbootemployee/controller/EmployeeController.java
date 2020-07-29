@@ -45,9 +45,8 @@ public class EmployeeController {
 //        }
 //        return employeeService.getEmployees();
 //    }
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     @GetMapping("/{id}")
-    public Employee getEmployee(@PathVariable Integer id){
+    public Employee getEmployeeById(@PathVariable Integer id){
         return employeeService.getEmployeeById(id);
     }
 
