@@ -43,8 +43,8 @@ public class CompanyController {
 
 
     @GetMapping("/companies")
-    public List<Company> getCompanies(@RequestParam(defaultValue = "-1", required = false) int page, @RequestParam(defaultValue = "-1", required = false) int pageSize) {
-        if (page != -1 && pageSize != -1) {
+    public List<Company> getCompanies(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if (page != null && pageSize != null) {
             return companyService.getCompanyByPage(page, pageSize);
         }
         return companyService.getCompanies();
