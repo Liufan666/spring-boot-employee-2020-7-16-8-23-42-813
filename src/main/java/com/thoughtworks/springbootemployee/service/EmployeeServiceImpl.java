@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,9 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void addEmployee(EmployeeRequestDto employeeRequestDto) {
-        Integer company_id = employeeRequestDto.getCompany_id();
+        Integer companyId = employeeRequestDto.getCompanyId();
         Employee employee = employeeRequestDto.toEntity();
-        Company company = companyRepository.findById(company_id).get();
+        Company company = companyRepository.findById(companyId).get();
         employee.setCompany(company);
         employeeRepository.save(employee);
     }
@@ -50,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Integer id,EmployeeRequestDto employeeRequestDto) {
-        Integer company_id = employeeRequestDto.getCompany_id();
+        Integer company_id = employeeRequestDto.getCompanyId();
         Employee employee = employeeRequestDto.toEntity();
         Company company = companyRepository.findById(company_id).get();
         employee.setCompany(company);

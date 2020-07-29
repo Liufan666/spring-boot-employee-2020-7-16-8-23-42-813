@@ -8,7 +8,7 @@ public class EmployeeRequestDto {
     private Integer age;
     private String name;
     private String gender;
-    private Integer company_id;
+    private Integer companyId;
 
     public Employee toEntity() {
         return new Employee(id, age, name, gender);
@@ -46,11 +46,11 @@ public class EmployeeRequestDto {
         this.gender = gender;
     }
 
-    public Integer getCompany_id() {
-        return company_id;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany_id(Integer company_id) {
-        this.company_id = company_id;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 }
