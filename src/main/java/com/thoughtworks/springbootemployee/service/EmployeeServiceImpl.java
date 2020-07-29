@@ -18,8 +18,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
 
-
-
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, CompanyRepository companyRepository) {
         this.employeeRepository = employeeRepository;
         this.companyRepository = companyRepository;
@@ -27,10 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void addEmployee(EmployeeRequestDto employeeRequestDto) {
-        Integer companyId = employeeRequestDto.getCompanyId();
-        Employee employee = employeeRequestDto.toEntity();
-        Company company = companyRepository.findById(companyId).get();
-        employee.setCompany(company);
+        Employee employee = getEmployee(employeeRequestDto);
         employeeRepository.save(employee);
     }
 
@@ -49,10 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Integer id,EmployeeRequestDto employeeRequestDto) {
-        Integer company_id = employeeRequestDto.getCompanyId();
-        Employee employee = employeeRequestDto.toEntity();
-        Company company = companyRepository.findById(company_id).get();
-        employee.setCompany(company);
+        Employee employee = getEmployee(employeeRequestDto);
         employee.setId(id);
         employeeRepository.save(employee);
     }
@@ -67,4 +59,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByGender(gender);
     }
 
+    private Employee getEmployee(EmployeeRequestDto employeeRequestDto) {
+        Integer companyId = employeeRequestDto.getCompanyId();
+        Employee employee = employeeRequestDto.toEntity();
+        Company company = companyRepository.findById(companyId).get();
+        employee.setCompany(company);
+        return employee;
+    }
 }
