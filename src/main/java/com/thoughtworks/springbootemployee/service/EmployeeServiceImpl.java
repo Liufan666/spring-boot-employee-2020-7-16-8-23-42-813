@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.utils.PageHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployee(int id) {
-        Employee employee = employees.stream()
+        Employee employee = employees.stream()//todo
                 .filter(e -> e.getId() == id)
                 .findFirst()
                 .orElse(null);
@@ -45,26 +46,20 @@ public class EmployeeServiceImpl implements EmployeeService {
             if (employeeTarget.getId() == id) {
                 employeeTarget.setAge(employee.getAge());
                 employeeTarget.setGender(employee.getGender());
-                employeeTarget.setName(employee.getName());
+                employeeTarget.setName(employee.getName());//todo
             }
         }
     }
 
     @Override
     public List<Employee> getEmployeeByPage(int page, int pageSize) {
-        List<Employee> currentEmployees = new ArrayList<>();
-        int startIndex = (page-1)*pageSize;
-        int endIndex = pageSize*page;
-        for (int index = startIndex; index < Math.min(endIndex, employees.size()); index++) {
-                currentEmployees.add(employees.get(index));
-        }
-        return currentEmployees;
+        return PageHelper.page(page,pageSize,employees);
     }
 
     @Override
     public List<Employee> getEmployeeByGender(String gender) {
         return employees.stream()
                 .filter(employee -> gender.equals(employee.getGender()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());//todo
     }
 }

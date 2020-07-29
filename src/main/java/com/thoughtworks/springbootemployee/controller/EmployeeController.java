@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController//todo
 public class EmployeeController {
 
     @Autowired
@@ -20,10 +20,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployees(@RequestParam(required = false,value = "page") Integer page,@RequestParam(value = "pageSize",required = false) Integer pageSize,@RequestParam(value = "gender",required = false) String gender){
+    public List<Employee> getEmployees(@RequestParam(required = false,value = "page") Integer page,
+                                       @RequestParam(value = "pageSize",required = false) Integer pageSize,
+                                       @RequestParam(value = "gender",required = false) String gender){
         if (page != null && pageSize != null){
             return employeeService.getEmployeeByPage(page,pageSize);
-        } else if (gender != null){
+        } else if (gender != null){//todo
             return employeeService.getEmployeeByGender(gender);
         }
         return employeeService.getEmployees();
