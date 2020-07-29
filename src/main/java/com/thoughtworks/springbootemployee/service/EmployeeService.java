@@ -16,7 +16,7 @@ public interface EmployeeService {
 
     void deleteEmployee(Integer id);
 
-    void updateEmployee(int id, Employee employee);
+    void updateEmployee(Integer id,EmployeeRequestDto employeeRequestDto);
 
     List<Employee> getEmployeeByPage(int page, int pageSize);
 
