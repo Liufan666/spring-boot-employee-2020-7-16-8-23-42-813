@@ -56,10 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         int startIndex = (page-1)*pageSize;
         int endIndex = pageSize*page;
         for (int index = startIndex; index < Math.min(endIndex, employees.size()); index++) {
-            if(employees.get(index)!=null){
                 currentEmployees.add(employees.get(index));
-            }
-
         }
         return currentEmployees;
     }

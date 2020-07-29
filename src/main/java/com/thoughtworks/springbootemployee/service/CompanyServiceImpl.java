@@ -61,10 +61,7 @@ public class CompanyServiceImpl implements CompanyServices {
         int startIndex = (page-1)*pageSize;
         int endIndex = pageSize*page;
         for (int index = startIndex; index < Math.min(endIndex, companies.size()); index++) {
-            if(companies.get(index)!=null){
                 currentCompanies.add(companies.get(index));
-            }
-
         }
         return currentCompanies;
     }

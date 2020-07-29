@@ -20,8 +20,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployees(@RequestParam(defaultValue =  "-1",required = false) int page,@RequestParam(defaultValue = "-1",required = false) int pageSize,@RequestParam(defaultValue = "gender",required = false) String gender){
-        if (page != -1 && pageSize != -1){
+    public List<Employee> getEmployees(@RequestParam(required = false,value = "page") Integer page,@RequestParam(value = "pageSize",required = false) Integer pageSize,@RequestParam(value = "gender",required = false) String gender){
+        if (page != null && pageSize != null){
             return employeeService.getEmployeeByPage(page,pageSize);
         } else if (gender != null){
             return employeeService.getEmployeeByGender(gender);
