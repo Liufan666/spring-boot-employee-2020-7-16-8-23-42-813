@@ -4,12 +4,10 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
-import com.thoughtworks.springbootemployee.utils.PageHelper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,11 +45,9 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepository.save(company);
     }
 
-
     @Override
     public void deleteCompany(Integer id) {
         companyRepository.deleteById(id);
     }
-
 
 }

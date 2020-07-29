@@ -8,6 +8,7 @@ import com.thoughtworks.springbootemployee.service.CompanyServiceImpl;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import com.thoughtworks.springbootemployee.service.EmployeeServiceImpl;
 import dto.EmployeeRequestDto;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,8 +30,6 @@ public class EmployeeServiceTest {
 
     @Mock
     private EmployeeRepository employeeRepository;
-    @InjectMocks
-    private EmployeeServiceImpl employeeService;
     @Mock
     private CompanyRepository companyRepository;
     @InjectMocks
@@ -39,9 +38,8 @@ public class EmployeeServiceTest {
     @Test
     void should_return_all_employees_when_find_all_given_none() {
         //given
-        EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
-        CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);
         EmployeeServiceImpl employeeServiceImpl = new EmployeeServiceImpl(employeeRepository, companyRepository);
+
         //when
         employeeServiceImpl.getEmployees(Pageable.unpaged());
 
