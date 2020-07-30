@@ -23,6 +23,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willCallRealMethod;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,5 +58,21 @@ public class EmployeeServiceTest {
 
         //then
         verify(employeeService).getEmployees(Pageable.unpaged());
+    }
+
+    @Test
+    void should_return_special_gender_employee_when_find_employee_by_gender_given_gender() {
+        //given
+        String gender = "female";
+        List<Employee> employees = new ArrayList<>();
+        Employee employee = new Employee(1,2,"vicky","female");
+        employees.add(employee);
+        when(employeeRepository.findByGender(gender)).thenReturn(employees);
+
+        //when
+        List<Employee> employeesByGender = employeeService.getEmployeesByGender(gender);
+
+        //then
+        assertEquals(employees,employeesByGender);
     }
 }
