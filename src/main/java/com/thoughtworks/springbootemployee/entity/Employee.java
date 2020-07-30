@@ -68,4 +68,12 @@ public class Employee {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    public Employee(Integer id, Integer age, String name, String gender) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.gender = gender;
+    }
+
 }

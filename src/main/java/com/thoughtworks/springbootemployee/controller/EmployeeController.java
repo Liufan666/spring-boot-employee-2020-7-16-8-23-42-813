@@ -6,6 +6,7 @@ import dto.EmployeeRequestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class EmployeeController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void addEmployee(@RequestBody EmployeeRequestDto employeeRequestDto) {
         employeeService.addEmployee(employeeRequestDto);
     }
@@ -34,7 +36,7 @@ public class EmployeeController {
     @GetMapping
     public Page<Employee> getEmployees(@PageableDefault Pageable pageable, @RequestParam(required = false) boolean unpaged){
         if(unpaged){
-            return employeeService.getEmployees(Pageable.unpaged());
+            pageable.isUnpaged();
         }
         return employeeService.getEmployees(pageable);
     }

@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
 import dto.EmployeeRequestDto;
+import dto.EmployeeResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 public interface EmployeeService {
-    void addEmployee(EmployeeRequestDto employeeRequestDto);
+    EmployeeResponseDto addEmployee(EmployeeRequestDto employeeRequestDto);
 
     Employee getEmployeeById(Integer id);
 

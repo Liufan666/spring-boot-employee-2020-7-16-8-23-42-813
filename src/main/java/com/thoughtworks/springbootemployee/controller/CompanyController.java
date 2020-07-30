@@ -47,7 +47,7 @@ public class CompanyController {
     }
 
     @GetMapping
-    public Page<Company> getCompanies(@PageableDefault Pageable pageable, @RequestParam(required = false) boolean unpaged){
+    public Page<Company> getCompanies(@PageableDefault Pageable pageable, @RequestParam(required = false) boolean unpaged){//TODO
         if(unpaged){
             return companyService.getCompanies(Pageable.unpaged());
         }

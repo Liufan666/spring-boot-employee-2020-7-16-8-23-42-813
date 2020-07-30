@@ -2,37 +2,36 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
-import com.thoughtworks.springbootemployee.service.CompanyServiceImpl;
-import com.thoughtworks.springbootemployee.service.EmployeeService;
-import com.thoughtworks.springbootemployee.service.EmployeeServiceImpl;
 import dto.EmployeeRequestDto;
+import dto.EmployeeResponseDto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.data.domain.Pageable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willCallRealMethod;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+@AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTest {
 
     @Mock
     private EmployeeRepository employeeRepository;
-//    @Mock
+    @Mock
     private CompanyRepository companyRepository;
     @InjectMocks
     private EmployeeServiceImpl employeeService;
@@ -74,5 +73,36 @@ public class EmployeeServiceTest {
 
         //then
         assertEquals(employees,employeesByGender);
+    }
+
+    @Test
+    void should_return_1_employee_when_add_1_employee_given_1_employee() {
+        //given
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto(1,12,"kevin","male",1);
+
+//        Employee employee = EmployeeMapper.getEmployee(employeeRequestDto);
+        Company company = new Company(1,"oocl",new ArrayList<>());
+
+//        when(employeeRepository.save(any())).thenReturn(employee);
+        when(companyRepository.findById(company.getCompanyId())).thenReturn(Optional.of(company));
+
+        //when
+//        Employee employeeSaved = employeeService.addEmployee(employeeRequestDto);
+        EmployeeResponseDto result = employeeService.addEmployee(employeeRequestDto);
+        //then
+        assertEquals(employeeRequestDto.getName(),result.getName());
+    }
+
+    @Test
+    void should_return_employee_when_mapper_given_employeeDto() {
+        //given
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto(1,17,"kevin","male",1);
+
+
+        //when
+        Employee employee = EmployeeMapper.getEmployee(employeeRequestDto);
+
+        //then
+        assertEquals(employee.getName(),employeeRequestDto.getName());
     }
 }

@@ -53,4 +53,15 @@ public class EmployeeRequestDto {
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
+
+    public EmployeeRequestDto(Integer id, Integer age, String name, String gender, Integer companyId) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.gender = gender;
+        this.companyId = companyId;
+    }
+
+    public EmployeeRequestDto() {
+    }
 }
