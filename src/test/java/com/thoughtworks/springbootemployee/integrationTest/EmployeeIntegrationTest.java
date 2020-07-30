@@ -11,11 +11,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.awt.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -81,5 +83,11 @@ public class EmployeeIntegrationTest {
         assertEquals("keven1", employeeRepository.findAll().stream().filter(e -> e.getId() == 2).findFirst().get().getName());
     }
 
-
+    @Test
+    void should_return_id_3_employee_when_find_employee_by_id_given_employee_id_3() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/employees/3").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("name")
+                        .value("haifeng"));
+    }
 }
