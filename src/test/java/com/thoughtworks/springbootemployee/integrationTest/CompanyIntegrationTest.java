@@ -56,4 +56,14 @@ public class CompanyIntegrationTest {
         List<Company> companies = companyRepository.findAll();
         assertEquals("ooct",companies.stream().filter(e -> e.getCompanyId() == 2).findFirst().get().getName());
     }
+
+    @Test
+    void should_return_1_company_when_delete_1_company_given_2_companies() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/companies/1"))
+                .andExpect(status().is2xxSuccessful());
+        List<Company> companyList = companyRepository.findAll();
+        assertEquals(1,companyList.size());
+    }
+
 }
