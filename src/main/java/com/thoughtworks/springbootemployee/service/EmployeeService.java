@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public interface EmployeeService {
-    EmployeeResponseDto addEmployee(EmployeeRequestDto employeeRequestDto);
+    void addEmployee(Employee employee);
 
     Employee getEmployeeById(Integer id);
 

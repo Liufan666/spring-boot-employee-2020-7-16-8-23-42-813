@@ -1,8 +1,10 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.service.CompanyService;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import dto.EmployeeRequestDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -17,16 +19,20 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final CompanyService companyService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, CompanyService companyService) {
         this.employeeService = employeeService;
+        this.companyService = companyService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-
     public void addEmployee(@RequestBody @Valid EmployeeRequestDto employeeRequestDto) {
-        employeeService.addEmployee(employeeRequestDto);
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeRequestDto, employee);
+        employee.setCompany(companyService.getCompanyById(employeeRequestDto.getCompanyId()));
+        employeeService.addEmployee(employee);
     }
 
     @GetMapping(params = "gender")
