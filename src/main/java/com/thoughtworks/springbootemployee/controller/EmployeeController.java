@@ -6,7 +6,6 @@ import com.thoughtworks.springbootemployee.service.EmployeeService;
 import dto.EmployeeRequestDto;
 import dto.EmployeeResponseDto;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,7 @@ public class EmployeeController {
     }
 
     @GetMapping(params = "gender")
-    public List<Employee> getEmployeesByGender(String gender) {
+    public List<EmployeeResponseDto> getEmployeesByGender(String gender) {
         return employeeService.getEmployeesByGender(gender);
     }
 

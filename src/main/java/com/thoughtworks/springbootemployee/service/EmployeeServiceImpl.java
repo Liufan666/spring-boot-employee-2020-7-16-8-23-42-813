@@ -53,7 +53,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeResponseDto> getEmployees(Pageable pageable) {
-        Page<EmployeeResponseDto> employeeResponseDtoPage;
         List<EmployeeResponseDto> employeeRequestDtoList = new ArrayList<>();
         Page<Employee> employees = employeeRepository.findAll(pageable);
         EmployeeResponseDto employeeResponseDto;
@@ -67,8 +66,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeesByGender(String gender) {
-        return employeeRepository.findByGender(gender);
+    public List<EmployeeResponseDto> getEmployeesByGender(String gender) {
+        List<EmployeeResponseDto> employeeResponseDtos = new ArrayList<>();
+        List<Employee> employees = employeeRepository.findByGender(gender);
+        EmployeeResponseDto employeeResponseDto;
+        for (Employee employee : employees) {
+            employeeResponseDto = new EmployeeResponseDto();
+            BeanUtils.copyProperties(employee, employeeResponseDto);
+            employeeResponseDto.setCompanyName(employee.getCompany().getName());
+            employeeResponseDtos.add(employeeResponseDto);
+        }
+        return employeeResponseDtos;
     }
 
     public Employee getEmployee(EmployeeRequestDto employeeRequestDto) {

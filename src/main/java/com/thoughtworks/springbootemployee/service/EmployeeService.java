@@ -21,5 +21,5 @@ public interface EmployeeService {
 
     List<EmployeeResponseDto> getEmployees(Pageable pageable);
 
-    List<Employee> getEmployeesByGender(String gender);
+    List<EmployeeResponseDto> getEmployeesByGender(String gender);
 }

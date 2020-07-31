@@ -3,8 +3,7 @@ package dto;
 import com.thoughtworks.springbootemployee.entity.Employee;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 public class EmployeeRequestDto {
 
