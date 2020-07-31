@@ -26,6 +26,8 @@ dependencies {
     compile 'com.h2database:h2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
     testCompile "org.mockito:mockito-core:3.4.0"
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation 'org.flywaydb:flyway-core'
 }
 
 group = 'com.thoughtworks'
