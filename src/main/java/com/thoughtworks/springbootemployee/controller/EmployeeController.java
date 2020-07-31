@@ -54,7 +54,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public void updateEmployee(@PathVariable Integer id, @RequestBody EmployeeRequestDto employeeRequestDto) {
+    public void updateEmployee(@PathVariable Integer id, @RequestBody @Valid EmployeeRequestDto employeeRequestDto) {
         employeeService.updateEmployee(id, employeeRequestDto);
     }
 }
