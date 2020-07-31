@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import dto.EmployeeRequestDto;
+import dto.EmployeeResponseDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,8 +51,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Integer id) {
-        return employeeService.getEmployeeById(id);
+    public EmployeeResponseDto getEmployeeById(@PathVariable Integer id) {
+        EmployeeResponseDto employeeResponseDto = new EmployeeResponseDto();
+        Employee employee = employeeService.getEmployeeById(id);
+        BeanUtils.copyProperties(employee, employeeResponseDto);
+        employeeResponseDto.setCompanyName(employee.getCompany().getName());
+        return employeeResponseDto;
     }
 
     @DeleteMapping("/{id}")
