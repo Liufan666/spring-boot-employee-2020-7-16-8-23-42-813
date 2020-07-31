@@ -12,9 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -53,8 +52,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Page<Employee> getEmployees(Pageable pageable) {
-        return employeeRepository.findAll(pageable);
+    public List<EmployeeResponseDto> getEmployees(Pageable pageable) {
+        Page<EmployeeResponseDto> employeeResponseDtoPage;
+        List<EmployeeResponseDto> employeeRequestDtoList = new ArrayList<>();
+        Page<Employee> employees = employeeRepository.findAll(pageable);
+        EmployeeResponseDto employeeResponseDto;
+        for (Employee employee : employees) {
+            employeeResponseDto = new EmployeeResponseDto();
+            BeanUtils.copyProperties(employee, employeeResponseDto);
+            employeeResponseDto.setCompanyName(employee.getCompany().getName());
+            employeeRequestDtoList.add(employeeResponseDto);
+        }
+        return employeeRequestDtoList;
     }
 
     @Override

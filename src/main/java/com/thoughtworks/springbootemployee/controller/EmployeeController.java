@@ -43,7 +43,7 @@ public class EmployeeController {
 
 
     @GetMapping
-    public Page<Employee> getEmployees(@PageableDefault Pageable pageable, @RequestParam(required = false) boolean unpaged){
+    public List<EmployeeResponseDto> getEmployees(@PageableDefault Pageable pageable, @RequestParam(required = false) boolean unpaged){
         if(unpaged){
             pageable.isUnpaged();
         }

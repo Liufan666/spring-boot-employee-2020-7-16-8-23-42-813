@@ -19,7 +19,7 @@ public interface EmployeeService {
 
     void updateEmployee(Integer id,EmployeeRequestDto employeeRequestDto);
 
-    Page<Employee> getEmployees(Pageable pageable);
+    List<EmployeeResponseDto> getEmployees(Pageable pageable);
 
     List<Employee> getEmployeesByGender(String gender);
 }
