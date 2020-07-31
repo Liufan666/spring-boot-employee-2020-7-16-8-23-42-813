@@ -4,9 +4,9 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import java.util.List;
 
 public class CompanyRequestDto {
+
     private String name;
     private List<Employee> employees;
-
 
     public String getName() {
         return name;
@@ -24,7 +24,7 @@ public class CompanyRequestDto {
         this.employees = employees;
     }
 
-    public CompanyRequestDto(Integer companyId, String name, List<Employee> employees) {
+    public CompanyRequestDto(String name, List<Employee> employees) {
         this.name = name;
         this.employees = employees;
     }

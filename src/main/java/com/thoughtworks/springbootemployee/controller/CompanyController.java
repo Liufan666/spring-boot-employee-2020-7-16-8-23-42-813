@@ -3,6 +3,8 @@ package com.thoughtworks.springbootemployee.controller;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
+import dto.CompanyRequestDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,7 +23,9 @@ public class CompanyController {
     }
 
     @PostMapping
-    public void addCompanies(@RequestBody Company company) {
+    public void addCompanies(@RequestBody CompanyRequestDto companyRequestDto) {
+        Company company = new Company();
+        BeanUtils.copyProperties(companyRequestDto, company);
         companyService.addCompanies(company);
     }
 

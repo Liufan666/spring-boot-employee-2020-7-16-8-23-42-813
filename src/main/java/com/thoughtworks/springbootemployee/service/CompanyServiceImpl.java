@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import dto.CompanyRequestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     public void addCompanies(Company company) {
         companyRepository.save(company);
-    }//todo
+    }
 
     @Override
     public Company getCompanyById(Integer id) {
