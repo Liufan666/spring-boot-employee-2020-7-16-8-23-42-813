@@ -3,8 +3,8 @@ package com.thoughtworks.springbootemployee.controller;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
-import dto.CompanyRequestDto;
-import dto.CompanyResponseDto;
+import com.thoughtworks.springbootemployee.dto.CompanyRequestDto;
+import com.thoughtworks.springbootemployee.dto.CompanyResponseDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +31,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public CompanyResponseDto getCompanyById(@PathVariable Integer id) {
+    public Company getCompanyById(@PathVariable Integer id) {
         return companyService.getCompanyById(id);
     }
 

@@ -1,9 +1,8 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
-import dto.EmployeeRequestDto;
-import dto.EmployeeResponseDto;
-import org.springframework.data.domain.Page;
+import com.thoughtworks.springbootemployee.dto.EmployeeRequestDto;
+import com.thoughtworks.springbootemployee.dto.EmployeeResponseDto;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable;

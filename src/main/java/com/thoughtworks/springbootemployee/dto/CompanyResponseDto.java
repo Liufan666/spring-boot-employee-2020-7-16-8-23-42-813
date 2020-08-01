@@ -1,4 +1,4 @@
-package dto;
+package com.thoughtworks.springbootemployee.dto;
 
 public class CompanyResponseDto {
     private String name;
