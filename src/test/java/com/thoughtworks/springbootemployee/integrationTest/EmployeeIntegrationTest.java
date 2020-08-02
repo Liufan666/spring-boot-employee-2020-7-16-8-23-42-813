@@ -103,11 +103,19 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should_return_id_3_employee_when_find_employee_by_id_given_employee_id_3() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/employees/3").contentType(MediaType.APPLICATION_JSON))
+    void should_return_the_employee_when_find_employee_by_id_given_one_employee() throws Exception {
+        String employeeJsonPayload = "{\n" +
+                "      \"name\": \"keven11111\",\n" +
+                "      \"age\": 20,\n" +
+                "      \"gender\": \"Male\",\n" +
+                "      \"companyId\" : 1\n" +
+                "     }";
+        mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayload)).andExpect(status().isCreated());
+        Integer id = employeeRepository.findAll().get(0).getId();
+        mockMvc.perform(MockMvcRequestBuilders.get("/employees/"+id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("name")
-                        .value("haifeng"));
+                        .value("keven11111"));
     }
 
 }
