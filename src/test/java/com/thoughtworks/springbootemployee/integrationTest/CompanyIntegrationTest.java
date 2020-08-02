@@ -98,14 +98,9 @@ public class CompanyIntegrationTest {
 
         mockMvc.perform(post("/companies").contentType(MediaType.APPLICATION_JSON).content(companyJsonPayload)).andExpect(status().is2xxSuccessful());
         Integer companyId = companyRepository.findAll().get(0).getCompanyId();
-        String companyJsonPayloadPut = "{\n" +
+        String companyJsonPayloadPut =  "{\n" +
                 "      \"name\": \"ooil\",\n" +
-                "      \"employees\": [{\n" +
-                "            \"id\": 1,\n" +
-                "            \"age\": 52,\n" +
-                "            \"name\": \"chengcheng\",\n" +
-                "            \"gender\": \"male\"\n" +
-                "        }]\n" +
+                "      \"employees\": null" +
                 "}";
 
 
