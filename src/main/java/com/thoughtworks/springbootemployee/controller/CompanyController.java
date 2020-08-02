@@ -32,8 +32,10 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public Company getCompanyById(@PathVariable Integer id) {
-        return companyService.getCompanyById(id);
+    public CompanyResponseDto getCompanyById(@PathVariable Integer id) {
+        Company company = companyService.getCompanyById(id);
+        CompanyResponseDto companyResponseDto = CompanyMapper.toCompanyResponsDto(company);
+        return companyResponseDto;
     }
 
 
