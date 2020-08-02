@@ -81,17 +81,24 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should_return_keven1_when_update_id_2_employee_given_JSON() throws Exception {
-        String employeeJsonPayload = "{\n" +//todo
-                "      \"id\": 2,\n" +
+    void should_return_keven1113_when_update_employee_given_JSON() throws Exception {
+        String employeeJsonPayload = "{\n" +
                 "      \"name\": \"keven11111\",\n" +
                 "      \"age\": 20,\n" +
                 "      \"gender\": \"Male\",\n" +
                 "      \"companyId\" : 1\n" +
                 "     }";
+        mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayload)).andExpect(status().isCreated());
+        Integer id = employeeRepository.findAll().get(0).getId();
+        String employeeJsonPayloadPut = "{\n" +
+                "      \"name\": \"keven1113\",\n" +
+                "      \"age\": 20,\n" +
+                "      \"gender\": \"Male\",\n" +
+                "      \"companyId\" : 1\n" +
+                "     }";
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/employees/2").contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayload)).andExpect(status().is2xxSuccessful());
-        assertEquals("keven11111", employeeRepository.findAll().stream().filter(e -> e.getId() == 2).findFirst().get().getName());
+        mockMvc.perform(MockMvcRequestBuilders.put("/employees/"+id).contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayloadPut)).andExpect(status().is2xxSuccessful());
+        assertEquals("keven1113", employeeRepository.findAll().get(0).getName());
     }
 
     @Test
