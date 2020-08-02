@@ -58,7 +58,8 @@ public class EmployeeIntegrationTest {
         mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayload)).andExpect(status().isCreated());
 
         List<Employee> employeeList = employeeRepository.findAll();
-        assertEquals("kevin",employeeList.stream().filter(e -> e.getName() == "kevin").findFirst().get().getName());
+//        assertEquals("kevin",employeeList.stream().filter(e -> e.getName() == "kevin").findFirst().get().getName());
+        assertEquals(1,employeeList.size());
 
     }
 
@@ -76,7 +77,7 @@ public class EmployeeIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/employees/1"))
                 .andExpect(status().is2xxSuccessful());
         List<Employee> employeeList = employeeRepository.findAll();
-        assertEquals(4,employeeList.size());
+        assertEquals(1,employeeList.size());
     }
 
     @Test
