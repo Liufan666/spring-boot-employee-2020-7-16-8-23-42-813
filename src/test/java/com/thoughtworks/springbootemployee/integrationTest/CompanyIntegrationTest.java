@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -110,5 +111,25 @@ public class CompanyIntegrationTest {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/companies/"+companyId).contentType(MediaType.APPLICATION_JSON).content(companyJsonPayloadPut)).andExpect(status().is2xxSuccessful());
         assertEquals("ooil", companyRepository.findAll().get(0).getName());
+    }
+
+    @Test
+    void should_return_the_company_when_find_company_by_id_given_one_company() throws Exception {
+        String companyJsonPayload = "{\n" +
+                "      \"name\": \"ooct\",\n" +
+                "      \"employees\": [{\n" +
+                "            \"id\": 1,\n" +
+                "            \"age\": 52,\n" +
+                "            \"name\": \"chengcheng\",\n" +
+                "            \"gender\": \"male\"\n" +
+                "        }]\n" +
+                "}";
+
+        mockMvc.perform(post("/companies").contentType(MediaType.APPLICATION_JSON).content(companyJsonPayload)).andExpect(status().is2xxSuccessful());
+        Integer companyId = companyRepository.findAll().get(0).getCompanyId();
+        mockMvc.perform(MockMvcRequestBuilders.get("/companies/"+companyId).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("name")
+                        .value("ooct"));
     }
 }
