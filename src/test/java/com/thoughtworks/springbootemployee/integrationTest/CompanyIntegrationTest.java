@@ -84,10 +84,21 @@ public class CompanyIntegrationTest {
     }
 
     @Test
-    void should_return_oocl_when_update_id_2_company_given_JSON() throws Exception {
+    void should_return_ooil_when_update_one_company_given_JSON() throws Exception {
         String companyJsonPayload = "{\n" +
-                "      \"name\": \"oocl\",\n" +
-                "      \"company_id\":2,\n" +
+                "      \"name\": \"ooct\",\n" +
+                "      \"employees\": [{\n" +
+                "            \"id\": 1,\n" +
+                "            \"age\": 52,\n" +
+                "            \"name\": \"chengcheng\",\n" +
+                "            \"gender\": \"male\"\n" +
+                "        }]\n" +
+                "}";
+
+        mockMvc.perform(post("/companies").contentType(MediaType.APPLICATION_JSON).content(companyJsonPayload)).andExpect(status().is2xxSuccessful());
+        Integer companyId = companyRepository.findAll().get(0).getCompanyId();
+        String companyJsonPayloadPut = "{\n" +
+                "      \"name\": \"ooil\",\n" +
                 "      \"employees\": [{\n" +
                 "            \"id\": 1,\n" +
                 "            \"age\": 52,\n" +
@@ -97,7 +108,7 @@ public class CompanyIntegrationTest {
                 "}";
 
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/companies/2").contentType(MediaType.APPLICATION_JSON).content(companyJsonPayload)).andExpect(status().is2xxSuccessful());
-        assertEquals("oocl", companyRepository.findAll().stream().filter(e -> e.getCompanyId() == 2).findFirst().get().getName());
+        mockMvc.perform(MockMvcRequestBuilders.put("/companies/"+companyId).contentType(MediaType.APPLICATION_JSON).content(companyJsonPayloadPut)).andExpect(status().is2xxSuccessful());
+        assertEquals("ooil", companyRepository.findAll().get(0).getName());
     }
 }
