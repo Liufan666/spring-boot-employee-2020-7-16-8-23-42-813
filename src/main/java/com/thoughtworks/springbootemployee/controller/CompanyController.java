@@ -43,7 +43,8 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public void updateCompany(@PathVariable Integer id, @RequestBody Company company) {
+    public void updateCompany(@PathVariable Integer id, @RequestBody @Valid CompanyRequestDto companyRequestDto) {
+        Company company = CompanyMapper.toCompany(companyRequestDto);
         companyService.updateCompany(id, company);
     }
 
