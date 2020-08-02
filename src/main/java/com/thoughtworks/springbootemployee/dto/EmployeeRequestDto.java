@@ -46,10 +46,12 @@ public class EmployeeRequestDto {
         this.companyId = companyId;
     }
 
-    
-
-
-
+    public EmployeeRequestDto(Integer age, @NotBlank String name, String gender, Integer companyId) {
+        this.age = age;
+        this.name = name;
+        this.gender = gender;
+        this.companyId = companyId;
+    }
 
     public EmployeeRequestDto() {
     }

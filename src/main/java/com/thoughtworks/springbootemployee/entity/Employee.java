@@ -22,29 +22,31 @@ public class Employee {
     @JsonIgnore
     private Company company;
 
-    public Employee(int id, int age, String name, String gender) {
+
+    public Employee() {
+    }
+
+
+    public Employee(Integer id, Integer age, String name, String gender) {
         this.id = id;
         this.age = age;
         this.name = name;
         this.gender = gender;
     }
 
-    public Employee() {
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -71,12 +73,4 @@ public class Employee {
     public void setCompany(Company company) {
         this.company = company;
     }
-
-    public Employee(Integer id, Integer age, String name, String gender) {
-        this.id = id;
-        this.age = age;
-        this.name = name;
-        this.gender = gender;
-    }
-
 }

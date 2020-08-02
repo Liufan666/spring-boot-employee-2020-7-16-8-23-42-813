@@ -1,8 +1,9 @@
 package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.Mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.mapper.EmployeeMapper;
+
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.dto.EmployeeRequestDto;
@@ -40,7 +41,6 @@ public class EmployeeServiceTest {
     @BeforeAll
     static void createEmployee(){
         employeeRequestDto = new EmployeeRequestDto();
-        employeeRequestDto.setId(1);
         employeeRequestDto.setAge(1);
         employeeRequestDto.setCompanyId(1);
         employeeRequestDto.setGender("male");
@@ -68,7 +68,7 @@ public class EmployeeServiceTest {
         when(employeeRepository.findByGender(gender)).thenReturn(employees);
 
         //when
-        List<Employee> employeesByGender = employeeService.getEmployeesByGender(gender);
+        List<EmployeeResponseDto> employeesByGender = employeeService.getEmployeesByGender(gender);
 
         //then
         assertEquals(employees,employeesByGender);
@@ -77,17 +77,18 @@ public class EmployeeServiceTest {
     @Test
     void should_return_1_employee_when_add_1_employee_given_1_employee() {
         //given
-        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto(1,12,"kevin","male",1);
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto(12,"kevin","male",1);
 
 //        Employee employee = EmployeeMapper.getEmployee(employeeRequestDto);
         Company company = new Company(1,"oocl",new ArrayList<>());
 
 //        when(employeeRepository.save(any())).thenReturn(employee);
         when(companyRepository.findById(company.getCompanyId())).thenReturn(Optional.of(company));
+        Employee employee = EmployeeMapper.toEmployee(employeeRequestDto);
 
         //when
 //        Employee employeeSaved = employeeService.addEmployee(employeeRequestDto);
-        EmployeeResponseDto result = employeeService.addEmployee(employeeRequestDto);
+        Employee result = employeeService.addEmployee(employee);
         //then
         assertEquals(employeeRequestDto.getName(),result.getName());
     }
@@ -95,11 +96,11 @@ public class EmployeeServiceTest {
     @Test
     void should_return_employee_when_mapper_given_employeeDto() {
         //given
-        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto(1,17,"kevin","male",1);
+        EmployeeRequestDto employeeRequestDto = new EmployeeRequestDto(17,"kevin","male",1);
 
 
         //when
-        Employee employee = EmployeeMapper.getEmployee(employeeRequestDto);
+        Employee employee = EmployeeMapper.toEmployee(employeeRequestDto);
 
         //then
         assertEquals(employee.getName(),employeeRequestDto.getName());
