@@ -1,6 +1,8 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.Mapper.CompanyMapper;
+import com.thoughtworks.springbootemployee.Mapper.EmployeeMapper;
+import com.thoughtworks.springbootemployee.dto.EmployeeResponseDto;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
@@ -13,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController//todo
@@ -34,14 +37,18 @@ public class CompanyController {
     @GetMapping("/{id}")
     public CompanyResponseDto getCompanyById(@PathVariable Integer id) {
         Company company = companyService.getCompanyById(id);
-        CompanyResponseDto companyResponseDto = CompanyMapper.toCompanyResponsDto(company);
-        return companyResponseDto;
+        return CompanyMapper.toCompanyResponsDto(company);
     }
 
 
     @GetMapping("/{id}/employees")
-    public List<Employee> getEmployeesByCompanyId(@PathVariable Integer id) {
-        return companyService.getEmployeesByCompanyId(id);
+    public List<EmployeeResponseDto> getEmployeesByCompanyId(@PathVariable Integer id) {
+        List<EmployeeResponseDto> employeeResponseDtoList = new ArrayList<>();
+        companyService.getEmployeesByCompanyId(id).forEach(e -> {
+            EmployeeResponseDto employeeResponseDto = EmployeeMapper.toEmployeeResponseDto(e);
+            employeeResponseDtoList.add(employeeResponseDto);
+        });
+        return employeeResponseDtoList;
     }
 
     @PutMapping("/{id}")
