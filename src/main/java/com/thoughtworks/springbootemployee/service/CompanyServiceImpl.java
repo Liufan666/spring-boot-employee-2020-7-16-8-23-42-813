@@ -36,7 +36,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Employee> getEmployeesByCompanyId(Integer id) {
-        return companyRepository.findById(id).get().getEmployees();//TODO
+        return companyRepository.findById(id).get().getEmployees();
     }
 
     @Override

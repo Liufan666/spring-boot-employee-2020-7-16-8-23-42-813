@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController//todo
+@RestController//
 @RequestMapping("/companies")
 public class CompanyController {
 

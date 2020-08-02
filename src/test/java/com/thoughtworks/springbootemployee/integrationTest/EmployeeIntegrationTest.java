@@ -58,13 +58,12 @@ public class EmployeeIntegrationTest {
         mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayload)).andExpect(status().isCreated());
 
         List<Employee> employeeList = employeeRepository.findAll();
-//        assertEquals("kevin",employeeList.stream().filter(e -> e.getName() == "kevin").findFirst().get().getName());
         assertEquals(1,employeeList.size());
 
     }
 
     @Test
-    void should_return_0_employees_when_delete_1_employee_given_1_employees() throws Exception {//todo
+    void should_return_0_employees_when_delete_1_employee_given_1_employees() throws Exception {
 
         String employeeJsonPayload = "{\n" +
                 "      \"name\": \"kevin\",\n" +
