@@ -51,9 +51,8 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public EmployeeResponseDto getEmployeeById(@PathVariable Integer id) {
-        EmployeeResponseDto employeeResponseDto = new EmployeeResponseDto();
         Employee employee = employeeService.getEmployeeById(id);
-        BeanUtils.copyProperties(employee, employeeResponseDto);
+        EmployeeResponseDto employeeResponseDto = EmployeeMapper.toEmployeeResponseDto(employee);
         employeeResponseDto.setCompanyName(employee.getCompany().getName());
         return employeeResponseDto;
     }

@@ -57,8 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Page<Employee> employees = employeeRepository.findAll(pageable);
         EmployeeResponseDto employeeResponseDto;
         for (Employee employee : employees) {
-            employeeResponseDto = new EmployeeResponseDto();
-            BeanUtils.copyProperties(employee, employeeResponseDto);
+            employeeResponseDto = EmployeeMapper.toEmployeeResponseDto(employee);
             employeeResponseDto.setCompanyName(employee.getCompany().getName());
             employeeRequestDtoList.add(employeeResponseDto);
         }
