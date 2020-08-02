@@ -78,12 +78,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeResponseDtos;
     }
 
-    public Employee getEmployee(EmployeeRequestDto employeeRequestDto) {
-        Integer companyId = employeeRequestDto.getCompanyId();
-        Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeRequestDto, employee);
-        Company company = companyRepository.findById(companyId).orElse(null);
-        employee.setCompany(company);
-        return employee;
-    }
 }
