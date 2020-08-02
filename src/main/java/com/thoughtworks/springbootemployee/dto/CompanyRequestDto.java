@@ -1,10 +1,13 @@
 package com.thoughtworks.springbootemployee.dto;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
+
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class CompanyRequestDto {
 
+    @NotBlank
     private String name;
     private List<Employee> employees;
 

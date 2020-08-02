@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.Mapper.CompanyMapper;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController//todo
@@ -24,9 +26,8 @@ public class CompanyController {
     }
 
     @PostMapping
-    public void addCompanies(@RequestBody CompanyRequestDto companyRequestDto) {
-        Company company = new Company();
-        BeanUtils.copyProperties(companyRequestDto, company);
+    public void addCompanies(@RequestBody @Valid CompanyRequestDto companyRequestDto) {
+        Company company = CompanyMapper.toCompany(companyRequestDto);
         companyService.addCompanies(company);
     }
 
