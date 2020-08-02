@@ -40,8 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void updateEmployee(Integer id, EmployeeRequestDto employeeRequestDto) {
-        Employee employee = getEmployee(employeeRequestDto);//TODO
+    public void updateEmployee(Integer id, Employee employee) {
         employee.setId(id);
         employeeRepository.save(employee);
     }

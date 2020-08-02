@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.Mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
@@ -29,8 +30,7 @@ public class EmployeeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addEmployee(@RequestBody @Valid EmployeeRequestDto employeeRequestDto) {
-        Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeRequestDto, employee);
+        Employee employee = EmployeeMapper.toEmployee(employeeRequestDto);
         employee.setCompany(companyService.getCompanyById(employeeRequestDto.getCompanyId()));
         employeeService.addEmployee(employee);
     }
@@ -65,6 +65,8 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public void updateEmployee(@PathVariable Integer id, @RequestBody @Valid EmployeeRequestDto employeeRequestDto) {
-        employeeService.updateEmployee(id, employeeRequestDto);
+        Employee employee = EmployeeMapper.toEmployee(employeeRequestDto);
+        employee.setCompany(companyService.getCompanyById(employeeRequestDto.getCompanyId()));
+        employeeService.updateEmployee(id, employee);
     }
 }
