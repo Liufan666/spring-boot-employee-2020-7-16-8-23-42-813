@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.Mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.NotFoundException;
@@ -70,8 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = employeeRepository.findByGender(gender);
         EmployeeResponseDto employeeResponseDto;
         for (Employee employee : employees) {
-            employeeResponseDto = new EmployeeResponseDto();
-            BeanUtils.copyProperties(employee, employeeResponseDto);
+            employeeResponseDto = EmployeeMapper.toEmployeeResponseDto(employee);
             employeeResponseDto.setCompanyName(employee.getCompany().getName());
             employeeResponseDtos.add(employeeResponseDto);
         }
