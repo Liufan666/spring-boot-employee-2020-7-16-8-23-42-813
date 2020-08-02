@@ -64,7 +64,7 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should_return_4_employees_when_delete_1_employee_given_5_employees() throws Exception {//todo
+    void should_return_0_employees_when_delete_1_employee_given_1_employees() throws Exception {//todo
 
         String employeeJsonPayload = "{\n" +
                 "      \"name\": \"kevin\",\n" +
@@ -74,10 +74,11 @@ public class EmployeeIntegrationTest {
                 "     }";
 
         mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(employeeJsonPayload)).andExpect(status().isCreated());
-        mockMvc.perform(MockMvcRequestBuilders.delete("/employees/1"))
+        Integer id = employeeRepository.findAll().get(0).getId();
+        mockMvc.perform(MockMvcRequestBuilders.delete("/employees/"+id))
                 .andExpect(status().is2xxSuccessful());
         List<Employee> employeeList = employeeRepository.findAll();
-        assertEquals(1,employeeList.size());
+        assertEquals(0,employeeList.size());
     }
 
     @Test
